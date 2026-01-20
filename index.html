@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Descobrir Alíquotas IPI e ST</title>
+<style>
+body{font-family:Arial;padding:20px;background:#f4f4f4}
+.card{background:#fff;padding:20px;border-radius:8px;max-width:500px;margin:auto}
+input{width:100%;padding:8px;margin:6px 0}
+button{padding:10px;width:100%;background:#28a745;color:#fff;border:none;border-radius:5px}
+.result{margin-top:15px;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="card">
+<h2>Calculadora de Alíquotas IPI e ST</h2>
 
+<label>Valor Unitário (R$)</label>
+<input type="number" id="valor" step="0.01">
+
+<label>Valor IPI (R$)</label>
+<input type="number" id="ipiValor" step="0.01">
+
+<label>Valor ST (R$)</label>
+<input type="number" id="stValor" step="0.01">
+
+<button onclick="calcular()">Descobrir Alíquotas</button>
+
+<div class="result" id="resultado"></div>
+</div>
+
+<script>
+function calcular(){
+  let valor = parseFloat(document.getElementById('valor').value)||0;
+  let ipiValor = parseFloat(document.getElementById('ipiValor').value)||0;
+  let stValor = parseFloat(document.getElementById('stValor').value)||0;
+
+  if(valor <= 0){
+    alert("Informe o valor unitário corretamente.");
+    return;
+  }
+
+  let ipiPerc = (ipiValor/valor)*100;
+  let stPerc = (stValor/valor)*100;
+
+  document.getElementById('resultado').innerHTML = 
+    `Alíquota IPI: ${ipiPerc.toFixed(2)}%<br>
+     Alíquota ST: ${stPerc.toFixed(2)}%`;
+}
+</script>
+</body>
+</html>
